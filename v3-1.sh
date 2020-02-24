@@ -64,16 +64,6 @@ echo -e "${Info} 正在检测安装git、unzip、crontab工具"
 yum install git unzip crontab -y
 echo -e "${Info} 检测安装git、unzip、crontab工具已完成"
 sleep 1
-##下载解压拷贝源码
-echo -e "${Info} 正在下载解压处理程序源码"
-wget -N --no-check-certificate "https://github.com/lizhongnian/ss-panel-v3-mod_Uim/archive/dev.zip"
-unzip dev.zip
-cd ss-panel-v3-mod_Uim-dev
-mv * .[^.]* /www/wwwroot/$website/
-cd ..
-rm -rf dev.zip ss-panel-v3-mod_Uim-dev/
-echo -e "${Info} 下载解压处理程序源码已完成"
-sleep 1
 ##处理php函数
 echo -e "${Info} 正在处理宝塔php内容"
 sed -i 's/system,//g' /www/server/php/71/etc/php.ini
@@ -83,12 +73,6 @@ sed -i 's/putenv,//g' /www/server/php/71/etc/php.ini
 sed -i 's/dynamic/static/g' /www/server/php/71/etc/php-fpm.conf
 sed -i 's/display_errors = On/display_errors = Off/g' /www/server/php/71/etc/php.ini
 echo -e "${Info} 处理宝塔php内容已完成"
-sleep 1
-##导入数据库
-echo -e "${Info} 正在导入数据库"
-cd sql/
-mysql -u$mysqlusername -p$mysqlpassword $mysqldatabase < glzjin_all.sql >/dev/null 2>&1
-echo -e "${Info} 导入数据库已完成"
 sleep 1
 ##安装依赖
 echo -e "${Info} 正在安装依赖"
